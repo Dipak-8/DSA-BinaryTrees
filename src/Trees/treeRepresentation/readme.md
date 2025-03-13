@@ -16,6 +16,7 @@ Explanation:
 The 7 node binary tree is represented above.
 Your Task:
 
+
 Complete the function void create_tree(node* root0, vector &vec), which takes a root of a Binary tree and vector array vec containing the values of nodes.
 
 Expected Time Complexity: O(1).
