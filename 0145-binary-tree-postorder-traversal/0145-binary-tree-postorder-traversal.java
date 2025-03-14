@@ -75,13 +75,13 @@ class Solution {
         while(current != null || !stack.isEmpty()) {
             if(current != null) {
                 stack.push(current);
-                current = current.left;
+                current = current.left;     // Go left as much as possible
             } else {
                 TreeNode peekNode = stack.peek();
                 if(peekNode.right != null && peekNode.right != lastVisited) {
-                    current = peekNode.right;
+                    current = peekNode.right;   // Go to right child
                 } else {
-                    answer.add(peekNode.val);
+                    answer.add(peekNode.val);   // Process node
                     lastVisited = stack.pop();
                 }
             }
