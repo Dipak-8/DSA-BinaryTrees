@@ -14,22 +14,22 @@
  * }
  */
 // <---------- RECURSIVE ---------->
- class Solution {
-    public void preorderHelper(TreeNode root, List<Integer> answer) {
-        if (root == null)   
-            return;
+//  class Solution {
+//     public void preorderHelper(TreeNode root, List<Integer> answer) {
+//         if (root == null)   
+//             return;
             
-        answer.add(root.val);
-        preorderHelper(root.left, answer);
-        preorderHelper(root.right, answer);
-    }
+//         answer.add(root.val);
+//         preorderHelper(root.left, answer);
+//         preorderHelper(root.right, answer);
+//     }
 
-    public List<Integer> preorderTraversal(TreeNode root) {
-        List<Integer> answer = new ArrayList<>();
-        preorderHelper(root, answer);
-        return answer;
-    }
-}
+//     public List<Integer> preorderTraversal(TreeNode root) {
+//         List<Integer> answer = new ArrayList<>();
+//         preorderHelper(root, answer);
+//         return answer;
+//     }
+// }
 
 // <---------- ITERATIVE ---------->
 // class Solution {
@@ -54,3 +54,44 @@
 //         return answer;
 //     }
 // }
+
+class Pair {
+    TreeNode node;
+    int num;
+
+    public Pair(TreeNode node, int num) {
+        this.node = node;
+        this.num = num;
+    }
+}
+class Solution {
+    public List<Integer> preorderTraversal(TreeNode root) {
+        List<Integer> answer = new ArrayList<>();
+        Stack<Pair> stack = new Stack<Pair>();
+
+        if(root == null)
+            return answer;
+
+        stack.push(new Pair(root, 1));
+        while(!stack.isEmpty()) {
+            Pair current = stack.pop();
+            if(current.num ==  1) {
+                answer.add(current.node.val);
+                current.num++;
+                stack.push(new Pair(current.node, current.num));
+                if(current.node.left != null)
+                    stack.push(new Pair(current.node.left, 1));
+            } else if(current.num == 2) {
+                current.num++;
+                stack.push(new Pair(current.node, current.num));
+                if(current.node.right != null)
+                    stack.push(new Pair(current.node.right, 1));
+            } else {
+                continue;
+            }
+        }
+        return answer;
+    }
+}
+
+
