@@ -55,6 +55,8 @@
 //     }
 // }
 
+
+//<---------- PREORDER, INORDER, POSTORDER (In One pass) ---------->
 class Pair {
     TreeNode node;
     int num;
@@ -67,7 +69,7 @@ class Pair {
 class Solution {
     public List<Integer> preorderTraversal(TreeNode root) {
         List<Integer> answer = new ArrayList<>();
-        Stack<Pair> stack = new Stack<Pair>();
+        Stack<Pair> stack = new Stack<>();
 
         if(root == null)
             return answer;
@@ -75,18 +77,25 @@ class Solution {
         stack.push(new Pair(root, 1));
         while(!stack.isEmpty()) {
             Pair current = stack.pop();
+
             if(current.num ==  1) {
-                answer.add(current.node.val);
+                answer.add(current.node.val); //push to preorder list
                 current.num++;
                 stack.push(new Pair(current.node, current.num));
+
                 if(current.node.left != null)
                     stack.push(new Pair(current.node.left, 1));
-            } else if(current.num == 2) {
+            } 
+            else if(current.num == 2) {
+                //push to inorder list
                 current.num++;
                 stack.push(new Pair(current.node, current.num));
+
                 if(current.node.right != null)
                     stack.push(new Pair(current.node.right, 1));
-            } else {
+            } 
+            else {
+                //push to postorder list
                 continue;
             }
         }
