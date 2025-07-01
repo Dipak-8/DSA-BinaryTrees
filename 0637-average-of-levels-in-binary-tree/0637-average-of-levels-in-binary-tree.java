@@ -22,9 +22,9 @@ class Solution {
             return result;
 
         queue.offer(root);
-        while (!queue.isEmpty()) {
-            List<Integer> temp = new ArrayList<>(); 
+        while (!queue.isEmpty()) { 
             int level = queue.size();
+            double sum = 0;
 
             for (int i = 0; i < level; i++) {
                 TreeNode node = queue.poll(); 
@@ -34,13 +34,9 @@ class Solution {
                 if (node.right != null)
                     queue.offer(node.right);
                 
-                temp.add(node.val);
+                sum += node.val;
             }
-            double sum = 0;
-            for(int j : temp) {
-                sum += j;
-            } 
-            double avg = sum/temp.size();
+            double avg = sum / level;
             result.add(avg);
         }
         return result;
