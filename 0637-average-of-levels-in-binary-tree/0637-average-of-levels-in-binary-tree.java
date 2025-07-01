@@ -14,12 +14,12 @@
  * }
  */
 class Solution {
-     public List<List<Integer>> levelOrder(TreeNode root, List<Double> result) {
-        List<List<Integer>> answer = new ArrayList<>(); 
+    public List<Double> averageOfLevels(TreeNode root) {
+        List<Double> result = new ArrayList<>(); 
         Queue<TreeNode> queue = new LinkedList<>();
 
         if (root == null)
-            return answer;
+            return result;
 
         queue.offer(root);
         while (!queue.isEmpty()) {
@@ -36,20 +36,13 @@ class Solution {
                 
                 temp.add(node.val);
             }
-            int size = temp.size();
             double sum = 0;
             for(int j : temp) {
                 sum += j;
             } 
-            double avg = sum/size;
+            double avg = sum/temp.size();
             result.add(avg);
-            answer.add(temp);
         }
-        return answer;
-    }
-    public List<Double> averageOfLevels(TreeNode root) {
-        List<Double> result = new ArrayList<>();
-        levelOrder(root, result);
         return result;
     }
 }
