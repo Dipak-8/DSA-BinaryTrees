@@ -36,9 +36,8 @@ class Solution {
                 
                 temp.add(node.val);
             }
-            answer.add(temp);
+            answer.add(0, temp);
         }
-        Collections.reverse(answer);
         return answer;
     }
 }
